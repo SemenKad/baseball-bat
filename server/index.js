@@ -23,10 +23,12 @@ try { process.loadEnvFile(path.join(ROOT, ".env")); } catch { /* .env нет —
    process.env.PORT намеренно НЕ используем — в dev харнесс ставит его = веб-порту Vite. */
 const PORT = Number(process.env.API_PORT) || 8787;
 
-/* Креды админки — из окружения (.env). Дефолты-плейсхолдеры специально не секретны:
-   реальные логин/пароль задаются в .env, который в .gitignore. */
-const ADMIN_EMAIL = process.env.ADMIN_EMAIL || "admin@example.com";
-const ADMIN_PASS = process.env.ADMIN_PASS || "change-me";
+/* Креды админки — строго из окружения (.env локально, env-vars на хостинге).
+   Дефолтов НЕТ: если не заданы — вход в админку отключён (никакого бэкдора). */
+const ADMIN_EMAIL = (process.env.ADMIN_EMAIL || "").trim().toLowerCase();
+const ADMIN_PASS = process.env.ADMIN_PASS || "";
+const ADMIN_ENABLED = Boolean(ADMIN_EMAIL && ADMIN_PASS);
+if (!ADMIN_ENABLED) console.warn("[baseball-bat] ВНИМАНИЕ: ADMIN_EMAIL/ADMIN_PASS не заданы — вход в админку отключён. Задайте их в .env или env-vars хостинга.");
 
 const F = {
   content: path.join(DATA, "content.json"),
@@ -128,6 +130,7 @@ app.get("/api/health", (_req, res) => res.json({ ok: true, events: EVENTS.length
 
 /* auth */
 app.post("/api/auth/login", (req, res) => {
+  if (!ADMIN_ENABLED) return res.status(503).json({ error: "admin_not_configured" });
   const { email = "", password = "" } = req.body || {};
   if (email.trim().toLowerCase() === ADMIN_EMAIL && password === ADMIN_PASS) {
     const token = crypto.randomUUID() + crypto.randomUUID();
