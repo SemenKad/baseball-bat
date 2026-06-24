@@ -3,11 +3,12 @@ import {
   Menu, X, ChevronDown, ArrowRight, Play, Star, Check,
   Send, Trophy, Zap, Shield, MapPin, Flame, Crown, Globe,
   Quote, Loader2, Users, Video, Target, TrendingUp, Dumbbell, Plane, Mountain,
-  User, Mail, MessageSquare,
+  User, Mail, MessageSquare, Sun, Moon,
 } from "lucide-react";
 import { LANGS, getStrings, deepMerge } from "./i18n";
 import { fetchMedia, fetchSettings, getLang, setLang as persistLang, fetchContent, sendContact, DEFAULT_MEDIA, DEFAULT_SETTINGS } from "./store";
 import { track } from "./analytics";
+import GiLogo from "./GiLogo";
 
 /* Брендовые иконки убраны из lucide-react — рисуем их в том же штриховом стиле */
 function Instagram({ size = 24, ...props }) {
@@ -201,6 +202,27 @@ function LangSwitcher({ compact = false }) {
   );
 }
 
+/* ---------- Переключатель темы (язык-нейтральный, иконный) ---------- */
+function ThemeToggle({ wide = false }) {
+  const { theme, toggleTheme } = useSite();
+  const dark = theme === "dark";
+  const label = dark ? "Switch to light theme" : "Switch to dark theme";
+  if (wide) {
+    return (
+      <button className={`theme-seg ${dark ? "theme-seg-dark" : "theme-seg-light"}`} onClick={toggleTheme} aria-label={label}>
+        <span className="theme-seg-knob" />
+        <span className="theme-seg-opt"><Sun size={15} aria-hidden="true" /></span>
+        <span className="theme-seg-opt"><Moon size={15} aria-hidden="true" /></span>
+      </button>
+    );
+  }
+  return (
+    <button className="burger theme-btn nav-theme" onClick={toggleTheme} aria-label={label} title={label}>
+      {dark ? <Moon size={18} aria-hidden="true" /> : <Sun size={18} aria-hidden="true" />}
+    </button>
+  );
+}
+
 /* ============================ NAVBAR ============================ */
 function Navbar() {
   const { L } = useSite();
@@ -233,7 +255,7 @@ function Navbar() {
       <header className={`nav ${scrolled ? "nav-scrolled" : ""}`}>
         <div className="wrap flex items-center justify-between h-[72px] gap-4">
           <a href="#home" className="flex items-center gap-3 no-underline shrink-0" onClick={close}>
-            <span className="logo-box font-display">VN</span>
+            <span className="logo-box"><GiLogo size={23} /></span>
             <span className="leading-none hidden sm:block">
               <span className="block font-display font-semibold uppercase tracking-[.14em] text-[15px] text-[var(--text-primary)]">
                 Nagoryansky
@@ -252,7 +274,8 @@ function Navbar() {
             ))}
           </nav>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2.5">
+            <ThemeToggle />
             <LangSwitcher />
             <a href="#cta" className="btn btn-primary nav-cta !py-[10px] !px-5 !text-[13.5px]" onClick={() => track("click", { id: "nav-join" })}>
               {L.nav.join}
@@ -267,7 +290,7 @@ function Navbar() {
       <div className={`overlay ${open ? "show" : ""}`} onClick={close} aria-hidden="true" />
       <aside className={`drawer ${open ? "open" : ""}`} aria-label="Mobile menu">
         <div className="flex items-center justify-between mb-8">
-          <span className="logo-box font-display">VN</span>
+          <span className="logo-box"><GiLogo size={23} /></span>
           <button className="burger" aria-label="Close menu" onClick={close}>
             <X size={22} />
           </button>
@@ -279,7 +302,11 @@ function Navbar() {
             </a>
           ))}
         </nav>
-        <div className="mt-6">
+        <div className="drawer-theme-row">
+          <span className="font-mono text-[10px] uppercase tracking-[.2em] text-[var(--text-secondary)]">Theme</span>
+          <ThemeToggle wide />
+        </div>
+        <div className="mt-4">
           <LangSwitcher compact />
         </div>
         <a href="#cta" onClick={close} className="btn btn-primary mt-8 justify-center">
@@ -333,10 +360,7 @@ function Hero() {
           aria-label="Background fight footage"
         />
       </div>
-      <div
-        className="absolute inset-0"
-        style={{ background: "linear-gradient(100deg, rgba(28,28,28,.97) 0%, rgba(28,28,28,.88) 48%, rgba(28,28,28,.6) 100%)" }}
-      />
+      <div className="hero-overlay" aria-hidden="true" />
       <div className="blob blob-a" aria-hidden="true" />
       <div className="blob blob-b" aria-hidden="true" />
 
@@ -1022,7 +1046,7 @@ function Footer({ navigate }) {
         <div className="grid md:grid-cols-[1.6fr_1fr_1.4fr] gap-10">
           <div>
             <div className="flex items-center gap-3">
-              <span className="logo-box font-display">VN</span>
+              <span className="logo-box"><GiLogo size={23} /></span>
               <span className="font-display font-semibold uppercase tracking-[.14em] text-[15px]">Nagoryansky</span>
             </div>
             <p className="text-[var(--text-secondary)] text-[13.5px] leading-relaxed mt-4 max-w-[280px]">{L.footer.about}</p>
@@ -1092,7 +1116,7 @@ function Lightbox({ src, onClose }) {
 }
 
 /* ============================ LANDING ============================ */
-export default function Landing({ navigate }) {
+export default function Landing({ navigate, theme, toggleTheme }) {
   const [lang, setLangState] = useState(getLang());
   const [lightbox, setLightbox] = useState(null);
   const [media, setMediaState] = useState(() => deepMerge(DEFAULT_MEDIA, {}));
@@ -1127,7 +1151,7 @@ export default function Landing({ navigate }) {
 
   useSectionTracking();
 
-  const ctx = { L, lang, changeLang, media, settings, openLightbox: setLightbox };
+  const ctx = { L, lang, changeLang, media, settings, openLightbox: setLightbox, theme, toggleTheme };
 
   return (
     <Ctx.Provider value={ctx}>

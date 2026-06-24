@@ -5,6 +5,7 @@ import {
   Trash2, Upload, Check, X, AlertTriangle, RefreshCw, Lock, ChevronDown, Film,
   ArrowUp, ArrowDown, Plus, Inbox,
 } from "lucide-react";
+import GiLogo from "./GiLogo";
 import { LANGS, STRINGS, deepMerge } from "./i18n";
 import {
   login, hasToken, verifyAuth, logout,
@@ -48,7 +49,7 @@ export function AdminLogin({ navigate }) {
     <div className="adm-login-wrap">
       <div className="blob blob-a" aria-hidden="true" />
       <form className={`adm-login ${err ? "adm-shake" : ""}`} onSubmit={submit}>
-        <span className="logo-box font-display !w-[52px] !h-[52px] !text-[20px] mx-auto">VN</span>
+        <span className="logo-box !w-[52px] !h-[52px] mx-auto"><GiLogo size={30} /></span>
         <h1 className="font-display uppercase font-bold text-[26px] text-center mt-5 mb-1">Admin panel</h1>
         <p className="text-[var(--text-secondary)] text-[13px] text-center m-0 mb-7">The Baseball Bat · управление сайтом</p>
 
@@ -903,7 +904,7 @@ export default function Admin({ navigate }) {
     <div className="adm">
       <aside className="adm-side">
         <div className="flex items-center gap-3 mb-9">
-          <span className="logo-box font-display">VN</span>
+          <span className="logo-box"><GiLogo size={23} /></span>
           <div className="leading-none">
             <div className="font-display uppercase tracking-[.12em] text-[13.5px] font-semibold">Admin</div>
             <div className="font-mono text-[9px] tracking-[.25em] text-[var(--accent)] uppercase mt-1">baseball bat</div>
