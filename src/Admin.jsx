@@ -54,7 +54,7 @@ export function AdminLogin({ navigate }) {
         <p className="text-[var(--text-secondary)] text-[13px] text-center m-0 mb-7">The Baseball Bat · управление сайтом</p>
 
         <label className="adm-label">Email</label>
-        <input className="adm-input" type="email" required value={email} onChange={(e) => setEmail(e.target.value)} placeholder="vladimir.n@thebaseballbat.com" autoComplete="username" />
+        <input className="adm-input" type="email" required value={email} onChange={(e) => setEmail(e.target.value)} placeholder="you@example.com" autoComplete="username" />
         <label className="adm-label mt-4">Пароль</label>
         <input className="adm-input" type="password" required value={pass} onChange={(e) => setPass(e.target.value)} placeholder="••••••••••••" autoComplete="current-password" />
 
@@ -104,10 +104,10 @@ function AreaChart({ days }) {
       <path d={clicksLine} fill="none" stroke={AC2} strokeWidth="1.5" strokeDasharray="5 5" opacity=".8" />
       {days.map((d, i) =>
         i % 5 === 0 || i === days.length - 1 ? (
-          <text key={i} x={x(i)} y={H - 8} fontSize="9.5" fill={DIM} textAnchor="middle" fontFamily="JetBrains Mono">{d.key}</text>
+          <text key={i} x={x(i)} y={H - 8} fontSize="9.5" fill={DIM} textAnchor="middle" fontFamily="IBM Plex Sans">{d.key}</text>
         ) : null
       )}
-      <text x={P} y={y(max) - 8} fontSize="10" fill={DIM} fontFamily="JetBrains Mono">max {max}</text>
+      <text x={P} y={y(max) - 8} fontSize="10" fill={DIM} fontFamily="IBM Plex Sans">max {max}</text>
       {days.map((d, i) => (
         <circle key={"c" + i} cx={x(i)} cy={y(d.visits)} r="7" fill="transparent">
           <title>{`${d.key}: ${d.visits} визитов, ${d.clicks} кликов`}</title>
@@ -181,8 +181,8 @@ function Donut({ data, size = 150 }) {
           off += frac;
           return el;
         })}
-        <text x="55" y="52" textAnchor="middle" fontSize="15" fontWeight="700" fill="#F4F1E6" fontFamily="Oswald">{total}</text>
-        <text x="55" y="66" textAnchor="middle" fontSize="7.5" fill={DIM} fontFamily="JetBrains Mono">TOTAL</text>
+        <text x="55" y="52" textAnchor="middle" fontSize="15" fontWeight="700" fill="#F4F1E6" fontFamily="IBM Plex Sans">{total}</text>
+        <text x="55" y="66" textAnchor="middle" fontSize="7.5" fill={DIM} fontFamily="IBM Plex Sans">TOTAL</text>
       </svg>
       <div className="flex flex-col gap-1.5">
         {data.slice(0, 6).map(([label, v], i) => (
@@ -932,7 +932,7 @@ export default function Admin({ navigate }) {
           <h1 className="font-display uppercase font-bold text-[clamp(20px,3vw,28px)] m-0">
             {TABS.find((t) => t.id === tab)?.label}
           </h1>
-          <span className="font-mono text-[11px] text-[var(--text-secondary)]">vladimir.n@thebaseballbat.com</span>
+          <span className="font-mono text-[11px] text-[var(--text-secondary)]">Администратор</span>
         </header>
         {tab === "overview" && <Overview />}
         {tab === "contacts" && <ContactsTab />}
