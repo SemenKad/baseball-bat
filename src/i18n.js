@@ -20,7 +20,8 @@ export const LANGS = [
 export const STRINGS = {
   /* ============================== EN ============================== */
   en: {
-    nav: { dossier: "Dossier", stats: "Numbers", path: "Journey", media: "Media", voices: "Voices", training: "Training", faq: "FAQ", join: "Join" },
+    nav: { dossier: "Dossier", stats: "Numbers", path: "Journey", media: "Media", voices: "Voices", contact: "Contact", faq: "FAQ", join: "Join" },
+    contact: { kicker: "Contact / 06", t1: "Get in", t2: "touch", sub: "Seminars, private coaching, collaborations or press — write directly. I read every message and answer personally.", namePh: "Your name", emailPh: "Your email", msgPh: "Your message — what is it about?", btn: "Send message", sending: "Sending…", done: "Message sent. I’ll get back to you personally.", disc: "I answer personally. No bots." },
     hero: {
       badge: "#1 North America · #2 World — AJP ranking",
       name1: "Vladimir", name2: "Nagoryansky",
@@ -115,7 +116,8 @@ export const STRINGS = {
 
   /* ============================== RU ============================== */
   ru: {
-    nav: { dossier: "Досье", stats: "Цифры", path: "Путь", media: "Медиа", voices: "Слово", training: "Тренировки", faq: "FAQ", join: "Записаться" },
+    nav: { dossier: "Досье", stats: "Цифры", path: "Путь", media: "Медиа", voices: "Слово", contact: "Связь", faq: "FAQ", join: "Написать" },
+    contact: { kicker: "Связь / 06", t1: "Напиши", t2: "напрямую", sub: "Семинары, личная подготовка, сотрудничество или пресса — пиши напрямую. Я читаю каждое сообщение и отвечаю лично.", namePh: "Твоё имя", emailPh: "Твой email", msgPh: "Сообщение — по какому вопросу?", btn: "Отправить", sending: "Отправляю…", done: "Сообщение отправлено. Отвечу лично.", disc: "Отвечаю лично. Без ботов." },
     hero: {
       badge: "#1 Северная Америка · #2 мира — рейтинг AJP",
       name1: "Владимир", name2: "Нагорянский",
@@ -210,7 +212,8 @@ export const STRINGS = {
 
   /* ============================== ES ============================== */
   es: {
-    nav: { dossier: "Dossier", stats: "Cifras", path: "Camino", media: "Media", voices: "Voces", training: "Entrenos", faq: "FAQ", join: "Apuntarse" },
+    nav: { dossier: "Dossier", stats: "Cifras", path: "Camino", media: "Media", voices: "Voces", contact: "Contacto", faq: "FAQ", join: "Escribir" },
+    contact: { kicker: "Contacto / 06", t1: "Escríbeme", t2: "directo", sub: "Seminarios, preparación personal, colaboraciones o prensa — escribe directamente. Leo cada mensaje y respondo en persona.", namePh: "Tu nombre", emailPh: "Tu email", msgPh: "Tu mensaje — ¿de qué se trata?", btn: "Enviar mensaje", sending: "Enviando…", done: "Mensaje enviado. Te responderé personalmente.", disc: "Respondo en persona. Sin bots." },
     hero: {
       badge: "#1 Norteamérica · #2 del mundo — ranking AJP",
       name1: "Vladimir", name2: "Nagoryansky",
@@ -294,7 +297,8 @@ export const STRINGS = {
 
   /* ============================== ZH ============================== */
   zh: {
-    nav: { dossier: "档案", stats: "数据", path: "历程", media: "媒体", voices: "评价", training: "训练", faq: "问答", join: "报名" },
+    nav: { dossier: "档案", stats: "数据", path: "历程", media: "媒体", voices: "评价", contact: "联系", faq: "问答", join: "联系我" },
+    contact: { kicker: "联系 / 06", t1: "直接", t2: "联系我", sub: "研讨课、私人指导、合作或媒体——请直接联系。我会阅读每一条消息并亲自回复。", namePh: "你的名字", emailPh: "你的邮箱", msgPh: "你的留言——关于什么？", btn: "发送", sending: "发送中…", done: "已发送。我会亲自回复你。", disc: "我亲自回复，绝非机器人。" },
     hero: {
       badge: "AJP排名 北美第1 · 世界第2",
       name1: "弗拉基米尔", name2: "纳戈良斯基",
@@ -378,7 +382,8 @@ export const STRINGS = {
 
   /* ============================== TR ============================== */
   tr: {
-    nav: { dossier: "Dosya", stats: "Rakamlar", path: "Yolculuk", media: "Medya", voices: "Yorumlar", training: "Antrenman", faq: "SSS", join: "Kayıt ol" },
+    nav: { dossier: "Dosya", stats: "Rakamlar", path: "Yolculuk", media: "Medya", voices: "Yorumlar", contact: "İletişim", faq: "SSS", join: "Yaz" },
+    contact: { kicker: "İletişim / 06", t1: "Doğrudan", t2: "yaz", sub: "Seminerler, kişisel hazırlık, iş birlikleri veya basın — doğrudan yaz. Her mesajı okur, bizzat yanıtlarım.", namePh: "Adın", emailPh: "E-postan", msgPh: "Mesajın — konu nedir?", btn: "Mesaj gönder", sending: "Gönderiliyor…", done: "Mesaj gönderildi. Sana bizzat döneceğim.", disc: "Bizzat yanıtlıyorum. Bot yok." },
     hero: {
       badge: "AJP sıralaması: Kuzey Amerika #1 · Dünya #2",
       name1: "Vladimir", name2: "Nagoryansky",
@@ -462,7 +467,8 @@ export const STRINGS = {
 
   /* ============================== LV ============================== */
   lv: {
-    nav: { dossier: "Dosjē", stats: "Skaitļi", path: "Ceļš", media: "Mediji", voices: "Atsauksmes", training: "Treniņi", faq: "BUJ", join: "Pieteikties" },
+    nav: { dossier: "Dosjē", stats: "Skaitļi", path: "Ceļš", media: "Mediji", voices: "Atsauksmes", contact: "Kontakti", faq: "BUJ", join: "Rakstīt" },
+    contact: { kicker: "Kontakti / 06", t1: "Raksti", t2: "tieši", sub: "Semināri, personīgā sagatavošana, sadarbība vai prese — raksti tieši. Es izlasu katru ziņu un atbildu personīgi.", namePh: "Tavs vārds", emailPh: "Tavs e-pasts", msgPh: "Tava ziņa — par ko?", btn: "Sūtīt ziņu", sending: "Sūta…", done: "Ziņa nosūtīta. Atbildēšu personīgi.", disc: "Atbildu personīgi. Bez botiem." },
     hero: {
       badge: "AJP rangs: #1 Ziemeļamerikā · #2 pasaulē",
       name1: "Vladimirs", name2: "Nagorjanskis",
@@ -546,7 +552,8 @@ export const STRINGS = {
 
   /* ============================== PT ============================== */
   pt: {
-    nav: { dossier: "Dossiê", stats: "Números", path: "Jornada", media: "Mídia", voices: "Vozes", training: "Treinos", faq: "FAQ", join: "Inscrever-se" },
+    nav: { dossier: "Dossiê", stats: "Números", path: "Jornada", media: "Mídia", voices: "Vozes", contact: "Contato", faq: "FAQ", join: "Escrever" },
+    contact: { kicker: "Contato / 06", t1: "Fale", t2: "comigo", sub: "Seminários, preparação pessoal, parcerias ou imprensa — escreva diretamente. Leio cada mensagem e respondo pessoalmente.", namePh: "Seu nome", emailPh: "Seu e-mail", msgPh: "Sua mensagem — sobre o quê?", btn: "Enviar mensagem", sending: "Enviando…", done: "Mensagem enviada. Vou te responder pessoalmente.", disc: "Respondo pessoalmente. Sem bots." },
     hero: {
       badge: "Ranking AJP: #1 América do Norte · #2 mundial",
       name1: "Vladimir", name2: "Nagoryansky",
@@ -630,7 +637,8 @@ export const STRINGS = {
 
   /* ============================== AR (UAE) ============================== */
   ar: {
-    nav: { dossier: "الملف", stats: "الأرقام", path: "المسيرة", media: "الوسائط", voices: "آراء", training: "التدريب", faq: "الأسئلة", join: "سجّل الآن" },
+    nav: { dossier: "الملف", stats: "الأرقام", path: "المسيرة", media: "الوسائط", voices: "آراء", contact: "تواصل", faq: "الأسئلة", join: "راسلني" },
+    contact: { kicker: "تواصل / 06", t1: "راسلني", t2: "مباشرة", sub: "ندوات، إعداد شخصي، تعاون أو صحافة — راسلني مباشرة. أقرأ كل رسالة وأرد بنفسي.", namePh: "اسمك", emailPh: "بريدك الإلكتروني", msgPh: "رسالتك — بخصوص ماذا؟", btn: "إرسال الرسالة", sending: "جارٍ الإرسال…", done: "تم إرسال الرسالة. سأرد عليك بنفسي.", disc: "أرد بنفسي. بلا روبوتات." },
     hero: {
       badge: "تصنيف AJP: الأول في أمريكا الشمالية · الثاني عالمياً",
       name1: "فلاديمير", name2: "ناغوريانسكي",
@@ -714,7 +722,8 @@ export const STRINGS = {
 
   /* ============================== JA ============================== */
   ja: {
-    nav: { dossier: "プロフィール", stats: "数字", path: "歩み", media: "メディア", voices: "証言", training: "トレーニング", faq: "FAQ", join: "申し込む" },
+    nav: { dossier: "プロフィール", stats: "数字", path: "歩み", media: "メディア", voices: "証言", contact: "連絡", faq: "FAQ", join: "連絡する" },
+    contact: { kicker: "連絡 / 06", t1: "直接", t2: "ご連絡を", sub: "セミナー、パーソナル指導、コラボ、取材——直接ご連絡ください。すべてのメッセージに目を通し、私が直接返信します。", namePh: "お名前", emailPh: "メールアドレス", msgPh: "メッセージ — ご用件は？", btn: "送信する", sending: "送信中…", done: "送信しました。私から直接ご返信します。", disc: "私が直接返信します。ボットではありません。" },
     hero: {
       badge: "AJPランキング 北米1位・世界2位",
       name1: "ウラジーミル", name2: "ナゴリャンスキー",
@@ -798,7 +807,8 @@ export const STRINGS = {
 
   /* ============================== DE ============================== */
   de: {
-    nav: { dossier: "Dossier", stats: "Zahlen", path: "Weg", media: "Medien", voices: "Stimmen", training: "Training", faq: "FAQ", join: "Anmelden" },
+    nav: { dossier: "Dossier", stats: "Zahlen", path: "Weg", media: "Medien", voices: "Stimmen", contact: "Kontakt", faq: "FAQ", join: "Schreiben" },
+    contact: { kicker: "Kontakt / 06", t1: "Schreib", t2: "direkt", sub: "Seminare, persönliches Coaching, Kooperationen oder Presse — schreib direkt. Ich lese jede Nachricht und antworte persönlich.", namePh: "Dein Name", emailPh: "Deine E-Mail", msgPh: "Deine Nachricht — worum geht’s?", btn: "Nachricht senden", sending: "Senden…", done: "Nachricht gesendet. Ich melde mich persönlich.", disc: "Ich antworte persönlich. Keine Bots." },
     hero: {
       badge: "AJP-Ranking: #1 Nordamerika · #2 weltweit",
       name1: "Vladimir", name2: "Nagoryansky",

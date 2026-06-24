@@ -301,6 +301,21 @@ function GlobalStyles() {
       .cta-btn:disabled{opacity:.75;cursor:wait}
       .cta-done{display:inline-flex;align-items:center;gap:11px;margin-top:36px;background:rgba(255,207,3,.1);border:1px solid rgba(255,207,3,.45);color:var(--accent);border-radius:999px;padding:15px 28px;font-weight:700;font-size:15px;animation:flipIn .4s var(--ease)}
 
+      /* ---------- contact form ---------- */
+      .contact-card{background:var(--bg-surface);border:1px solid var(--border);border-radius:20px;padding:clamp(22px,3vw,34px);display:flex;flex-direction:column;gap:14px;box-shadow:var(--shadow-lg)}
+      .contact-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+      @media(max-width:560px){.contact-row{grid-template-columns:1fr}}
+      .contact-field{display:flex;align-items:center;gap:11px;background:rgba(244,241,230,.05);border:1px solid var(--border);border-radius:11px;padding:0 15px;transition:border-color .3s}
+      .contact-field:focus-within{border-color:rgba(255,207,3,.55)}
+      .contact-field>svg{color:var(--text-secondary);flex-shrink:0}
+      .contact-field-area{align-items:flex-start;padding-top:13px}
+      .contact-input{flex:1;min-width:0;background:transparent;border:none;outline:none;color:var(--text-primary);padding:13px 0;font-family:'Manrope',sans-serif;font-size:15px;resize:vertical}
+      .contact-input::placeholder{color:rgba(240,237,227,.42)}
+      .contact-error{display:flex;align-items:center;gap:8px;color:#ff7b7b;font-size:13px}
+      .contact-socials{display:flex;justify-content:center;gap:12px;margin-top:6px;padding-top:16px;border-top:1px solid var(--border)}
+      .contact-done{display:flex;flex-direction:column;align-items:center;text-align:center;background:var(--bg-surface);border:1px solid rgba(255,207,3,.4);border-radius:20px;padding:clamp(36px,5vw,56px);animation:flipIn .4s var(--ease)}
+      .contact-done-icon{display:inline-flex;align-items:center;justify-content:center;width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,var(--accent-from),var(--accent-to));color:#1C1C1C}
+
       /* ---------- footer ---------- */
       .giant{font-size:clamp(44px,10.5vw,148px);font-weight:700;text-transform:uppercase;line-height:1;letter-spacing:.02em;white-space:nowrap;text-align:center;color:transparent;-webkit-text-stroke:1px rgba(244,241,230,.1);padding:clamp(36px,5vw,70px) 0 clamp(28px,4vw,56px);user-select:none}
       .soc{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:11px;border:1px solid var(--border);color:var(--text-secondary);background:rgba(244,241,230,.03);transition:all .3s var(--ease)}

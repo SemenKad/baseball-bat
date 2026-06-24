@@ -87,6 +87,11 @@ export const buildLibrary = (uploads = []) => [
   ...uploads.map((u) => ({ id: u.id, src: u.src, type: u.type || "photo", label: u.name + " (загружено)" })),
 ];
 
+/* ---------------- Заявки с формы связи ---------------- */
+export const sendContact = (data) => req("/contact", { method: "POST", body: data });
+export const fetchContacts = () => safe("/contacts", { auth: true }).then((c) => c || []);
+export const clearContacts = () => req("/contacts/clear", { method: "POST", auth: true });
+
 /* ---------------- Сброс контента ---------------- */
 export const resetAllContent = () => req("/reset", { method: "POST", auth: true });
 

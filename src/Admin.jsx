@@ -3,7 +3,7 @@ import {
   LayoutDashboard, Type, Image as ImageIcon, Settings as SettingsIcon, LogOut, ExternalLink,
   Eye, MousePointerClick, Mail, Users as UsersIcon, TrendingUp, Play, Globe, Smartphone,
   Trash2, Upload, Check, X, AlertTriangle, RefreshCw, Lock, ChevronDown, Film,
-  ArrowUp, ArrowDown, Plus,
+  ArrowUp, ArrowDown, Plus, Inbox,
 } from "lucide-react";
 import { LANGS, STRINGS, deepMerge } from "./i18n";
 import {
@@ -12,6 +12,7 @@ import {
   fetchMedia, saveMedia, DEFAULT_MEDIA,
   fetchSettings, saveSettings,
   buildLibrary, uploadMedia, deleteUpload, fetchUploads,
+  fetchContacts, clearContacts,
   resetAllContent,
 } from "./store";
 import { getEvents, aggregate, clearDemo, clearAll, hasDemo, track } from "./analytics";
@@ -375,7 +376,7 @@ function Overview() {
 const SECTION_LABELS = {
   nav: "Навигация", hero: "Главный экран", countdown: "Каунтдаун", marquee: "Бегущая строка",
   dossier: "Досье", stats: "Статистика", proofs: "Пруфы", path: "Путь",
-  media: "Медиа", voices: "Отзывы", pricing: "Тарифы", faq: "FAQ", cta: "CTA-баннер", footer: "Футер",
+  media: "Медиа", voices: "Отзывы", contact: "Форма связи", faq: "FAQ", cta: "CTA-баннер", footer: "Футер",
 };
 
 function setIn(obj, path, val) {
@@ -806,10 +807,68 @@ function SettingsTab() {
 }
 
 /* ============================================================
+   ЗАЯВКИ — сообщения с формы связи
+   ============================================================ */
+const LANG_FLAG = Object.fromEntries(LANGS.map((l) => [l.code, l.flag]));
+
+function ContactsTab() {
+  const [items, setItems] = useState(null);
+  const reload = useCallback(() => { fetchContacts().then((c) => setItems(c.slice().reverse())); }, []);
+  useEffect(() => { reload(); }, [reload]);
+
+  if (!items) return <div className="adm-banner"><RefreshCw size={15} className="spin" aria-hidden="true" /> Загрузка заявок…</div>;
+
+  return (
+    <div>
+      <div className="adm-banner !mb-6">
+        <Inbox size={15} aria-hidden="true" />
+        <span>Сообщения с формы связи на сайте. Всего: <b>{items.length}</b>. Копятся на сервере со всех посетителей.</span>
+        <div className="flex gap-2 ml-auto shrink-0">
+          <button className="adm-btn-sm" onClick={reload}><RefreshCw size={13} aria-hidden="true" /> Обновить</button>
+          {items.length > 0 && (
+            <button className="adm-btn-sm" onClick={async () => { if (confirm("Удалить все заявки?")) { await clearContacts(); reload(); } }}>
+              <Trash2 size={13} aria-hidden="true" /> Очистить
+            </button>
+          )}
+        </div>
+      </div>
+
+      {items.length === 0 ? (
+        <div className="adm-card text-center text-[var(--text-secondary)] py-12">
+          <Inbox size={30} className="mx-auto mb-3 opacity-50" aria-hidden="true" />
+          Заявок пока нет. Сообщения с формы «{`Связь`}» на сайте появятся здесь.
+        </div>
+      ) : (
+        <div className="flex flex-col gap-3">
+          {items.map((c) => (
+            <div key={c.id} className="adm-card !p-0 overflow-hidden">
+              <div className="flex items-center gap-3 flex-wrap px-5 py-3 border-b border-[var(--border)] bg-[rgba(244,241,230,.03)]">
+                <span className="font-display uppercase font-semibold text-[15px]">{c.name}</span>
+                <a href={`mailto:${c.email}`} className="f-link font-mono text-[12px] !text-[var(--accent)]">{c.email}</a>
+                <span className="font-mono text-[10px] text-[var(--text-secondary)] ml-auto">
+                  {LANG_FLAG[c.lang] || ""} {new Date(c.t).toLocaleString("ru-RU", { day: "2-digit", month: "2-digit", year: "numeric", hour: "2-digit", minute: "2-digit" })}
+                </span>
+              </div>
+              <p className="px-5 py-4 m-0 text-[14px] leading-relaxed whitespace-pre-wrap">{c.message}</p>
+              <div className="px-5 pb-4">
+                <a href={`mailto:${c.email}?subject=${encodeURIComponent("Re: The Baseball Bat")}`} className="adm-btn-sm adm-btn-acc w-fit">
+                  <Mail size={13} aria-hidden="true" /> Ответить
+                </a>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+/* ============================================================
    ОБОЛОЧКА АДМИНКИ — /admin
    ============================================================ */
 const TABS = [
   { id: "overview", label: "Обзор", icon: LayoutDashboard },
+  { id: "contacts", label: "Заявки", icon: Inbox },
   { id: "content", label: "Контент", icon: Type },
   { id: "media", label: "Медиа", icon: ImageIcon },
   { id: "settings", label: "Настройки", icon: SettingsIcon },
@@ -875,6 +934,7 @@ export default function Admin({ navigate }) {
           <span className="font-mono text-[11px] text-[var(--text-secondary)]">vladimir.n@thebaseballbat.com</span>
         </header>
         {tab === "overview" && <Overview />}
+        {tab === "contacts" && <ContactsTab />}
         {tab === "content" && <ContentTab />}
         {tab === "media" && <MediaTab />}
         {tab === "settings" && <SettingsTab />}

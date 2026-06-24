@@ -3,9 +3,10 @@ import {
   Menu, X, ChevronDown, ArrowRight, Play, Star, Check,
   Send, Trophy, Zap, Shield, MapPin, Flame, Crown, Globe,
   Quote, Loader2, Users, Video, Target, TrendingUp, Dumbbell, Plane, Mountain,
+  User, Mail, MessageSquare,
 } from "lucide-react";
 import { LANGS, getStrings, deepMerge } from "./i18n";
-import { fetchMedia, fetchSettings, getLang, setLang as persistLang, fetchContent, DEFAULT_MEDIA, DEFAULT_SETTINGS } from "./store";
+import { fetchMedia, fetchSettings, getLang, setLang as persistLang, fetchContent, sendContact, DEFAULT_MEDIA, DEFAULT_SETTINGS } from "./store";
 import { track } from "./analytics";
 
 /* Брендовые иконки убраны из lucide-react — рисуем их в том же штриховом стиле */
@@ -208,7 +209,7 @@ function Navbar() {
 
   const NAV_LINKS = [
     [L.nav.dossier, "#dossier"], [L.nav.stats, "#stats"], [L.nav.path, "#path"],
-    [L.nav.media, "#media"], [L.nav.voices, "#voices"], [L.nav.training, "#training"], [L.nav.faq, "#faq"],
+    [L.nav.media, "#media"], [L.nav.voices, "#voices"], [L.nav.contact, "#contact"], [L.nav.faq, "#faq"],
   ];
 
   useEffect(() => {
@@ -827,109 +828,76 @@ function Voices() {
   );
 }
 
-/* ============================ PRICING ============================ */
-const TIER_ICONS = [Video, Target, Users];
-const TIER_IDS = ["pricing-video-review", "pricing-personal", "pricing-seminar"];
+/* ============================ CONTACT FORM ============================ */
+function ContactForm() {
+  const { L, settings } = useSite();
+  const C = L.contact;
+  const [form, setForm] = useState({ name: "", email: "", message: "" });
+  const [sending, setSending] = useState(false);
+  const [done, setDone] = useState(false);
+  const [error, setError] = useState(false);
 
-function PriceCard({ tier, icon: Icon, yearly, delay, popLabel, perMonth, monthNote, yearNote, trackId }) {
-  const isPop = !!tier.popular;
-  const isDark = !!tier.dark;
-  const price = tier.custom ? null : yearly ? tier.priceY : tier.priceM;
+  const upd = (k) => (e) => setForm((f) => ({ ...f, [k]: e.target.value }));
 
-  const inner = (
-    <div className={`price-card ${isDark ? "price-dark" : ""}`}>
-      {isPop && <div className="pop-badge font-mono">{popLabel}</div>}
-      <div className="icon-box"><Icon size={22} aria-hidden="true" /></div>
-      <h3 className="font-display uppercase font-semibold text-[22px] mt-5">{tier.name}</h3>
-      <p className="text-[var(--text-secondary)] text-[13.5px] mt-1 m-0">{tier.desc}</p>
-
-      <div className="mt-6 min-h-[92px]">
-        {price !== null ? (
-          <div key={yearly ? "y" : "m"} className="price-flip">
-            <span className="font-display font-bold leading-none" style={{ fontSize: "clamp(42px,3.6vw,56px)" }}>{price}</span>
-            <span className="text-[var(--text-secondary)] text-[14px] ml-2">{perMonth}</span>
-            <div className="font-mono text-[11px] mt-2 uppercase tracking-wider" style={{ color: yearly ? "var(--accent)" : "var(--text-secondary)" }}>
-              {yearly ? yearNote : monthNote}
-            </div>
-          </div>
-        ) : (
-          <div>
-            <span className="font-display font-bold leading-none" style={{ fontSize: "clamp(34px,2.8vw,42px)" }}>{tier.custom}</span>
-            <div className="font-mono text-[11px] text-[var(--text-secondary)] mt-2 uppercase tracking-wider">{tier.note}</div>
-          </div>
-        )}
-      </div>
-
-      <ul className="list-none p-0 m-0 mt-6 flex flex-col gap-3 flex-1">
-        {tier.feats.map((label, i) => {
-          const ok = i < tier.feats.length - (tier.excluded || 0);
-          return (
-            <li key={label} className="flex items-start gap-3 text-[14px]">
-              {ok ? (
-                <Check size={16} className="text-[var(--accent)] mt-0.5 shrink-0" aria-hidden="true" />
-              ) : (
-                <X size={16} className="text-[var(--text-secondary)] opacity-50 mt-0.5 shrink-0" aria-hidden="true" />
-              )}
-              <span className={ok ? "" : "line-through text-[var(--text-secondary)] opacity-60"}>{label}</span>
-            </li>
-          );
-        })}
-      </ul>
-
-      <a href="#cta" className={`btn mt-8 justify-center ${isPop ? "btn-primary" : "btn-ghost"}`} onClick={() => track("click", { id: trackId })}>
-        {tier.cta} <ArrowRight size={16} aria-hidden="true" />
-      </a>
-    </div>
+  const submit = useCallback(
+    async (e) => {
+      e.preventDefault();
+      if (sending) return;
+      if (!form.name.trim() || !form.email.trim() || !form.message.trim()) return;
+      setSending(true);
+      setError(false);
+      track("click", { id: "contact-submit" });
+      try {
+        await sendContact({ ...form, lang: getLang() });
+        setDone(true);
+      } catch {
+        setError(true);
+      } finally {
+        setSending(false);
+      }
+    },
+    [form, sending]
   );
 
   return (
-    <Reveal delay={delay} className="h-full">
-      {isPop ? (
-        <div className="pop-wrap h-full"><div className="pop-border h-full">{inner}</div></div>
-      ) : (
-        inner
-      )}
-    </Reveal>
-  );
-}
-
-function Pricing() {
-  const { L } = useSite();
-  const [yearly, setYearly] = useState(false);
-  const tiers = L.pricing.tiers.map((t, i) => ({ ...t, popular: i === 1, dark: i === 2 }));
-
-  return (
-    <section id="training" className="sec">
+    <section id="contact" className="sec">
       <div className="wrap">
-        <SecHead kicker={L.pricing.kicker} t1={L.pricing.t1} t2={L.pricing.t2} sub={L.pricing.sub} center />
-        <Reveal className="flex items-center justify-center mb-12">
-          <div className="toggle" role="tablist" aria-label="Billing period">
-            <span className="toggle-pill" style={{ transform: yearly ? "translateX(100%)" : "translateX(0)" }} aria-hidden="true" />
-            <button role="tab" aria-selected={!yearly} className={`toggle-btn ${!yearly ? "toggle-on" : ""}`} onClick={() => setYearly(false)}>
-              {L.pricing.month}
-            </button>
-            <button role="tab" aria-selected={yearly} className={`toggle-btn ${yearly ? "toggle-on" : ""}`} onClick={() => { setYearly(true); track("click", { id: "pricing-yearly" }); }}>
-              {L.pricing.year}
-              <span className="toggle-badge font-mono">{L.pricing.save}</span>
-            </button>
-          </div>
+        <SecHead kicker={C.kicker} t1={C.t1} t2={C.t2} sub={C.sub} center />
+        <Reveal className="max-w-[640px] mx-auto">
+          {done ? (
+            <div className="contact-done">
+              <span className="contact-done-icon"><Check size={26} aria-hidden="true" /></span>
+              <p className="font-display uppercase text-[22px] m-0 mt-4">{C.done}</p>
+            </div>
+          ) : (
+            <form className="contact-card" onSubmit={submit}>
+              <div className="contact-row">
+                <label className="contact-field">
+                  <User size={16} aria-hidden="true" />
+                  <input className="contact-input" type="text" required placeholder={C.namePh} aria-label={C.namePh} value={form.name} onChange={upd("name")} />
+                </label>
+                <label className="contact-field">
+                  <Mail size={16} aria-hidden="true" />
+                  <input className="contact-input" type="email" required placeholder={C.emailPh} aria-label={C.emailPh} value={form.email} onChange={upd("email")} />
+                </label>
+              </div>
+              <label className="contact-field contact-field-area">
+                <MessageSquare size={16} aria-hidden="true" />
+                <textarea className="contact-input" required rows={5} placeholder={C.msgPh} aria-label={C.msgPh} value={form.message} onChange={upd("message")} />
+              </label>
+              {error && <div className="contact-error"><X size={14} aria-hidden="true" /> {C.disc}</div>}
+              <button type="submit" className="btn btn-primary justify-center w-full !py-4" disabled={sending}>
+                {sending ? <Loader2 size={18} className="spin" aria-hidden="true" /> : (<>{C.btn} <Send size={16} aria-hidden="true" /></>)}
+              </button>
+              <p className="font-mono text-[11px] uppercase tracking-[.2em] text-[var(--text-secondary)] text-center mt-1">{C.disc}</p>
+              <div className="contact-socials">
+                <a href={settings.links.telegram} target="_blank" rel="noreferrer" className="soc" aria-label="Telegram" onClick={() => track("click", { id: "telegram" })}><Send size={17} /></a>
+                <a href={settings.links.instagram} target="_blank" rel="noreferrer" className="soc" aria-label="Instagram" onClick={() => track("click", { id: "instagram" })}><Instagram size={17} /></a>
+                <a href={settings.links.youtube} target="_blank" rel="noreferrer" className="soc" aria-label="YouTube" onClick={() => track("click", { id: "youtube" })}><Youtube size={17} /></a>
+              </div>
+            </form>
+          )}
         </Reveal>
-        <div className="grid lg:grid-cols-3 gap-6 items-stretch lg:px-2">
-          {tiers.map((t, i) => (
-            <PriceCard
-              key={i}
-              tier={t}
-              icon={TIER_ICONS[i]}
-              yearly={yearly}
-              delay={i * 120}
-              popLabel={L.pricing.popular}
-              perMonth={L.pricing.perMonth}
-              monthNote={L.pricing.monthNote}
-              yearNote={L.pricing.yearNote}
-              trackId={TIER_IDS[i]}
-            />
-          ))}
-        </div>
       </div>
     </section>
   );
@@ -1032,13 +1000,8 @@ function Footer({ navigate }) {
     {
       title: L.footer.sections,
       links: [
-        [L.nav.dossier, "#dossier"], [L.nav.stats, "#stats"], [L.nav.path, "#path"], [L.nav.media, "#media"], [L.nav.faq, "#faq"],
-      ],
-    },
-    {
-      title: L.footer.training,
-      links: [
-        [L.pricing.tiers[0].name, "#training"], [L.pricing.tiers[1].name, "#training"], [L.pricing.tiers[2].name, "#training"], [L.footer.subscribe, "#cta"],
+        [L.nav.dossier, "#dossier"], [L.nav.stats, "#stats"], [L.nav.path, "#path"],
+        [L.nav.media, "#media"], [L.nav.voices, "#voices"], [L.nav.contact, "#contact"], [L.nav.faq, "#faq"],
       ],
     },
     {
@@ -1056,7 +1019,7 @@ function Footer({ navigate }) {
     <footer className="bg-[var(--bg-deep)] border-t border-[var(--border)] overflow-hidden">
       <div className="giant font-display" aria-hidden="true">The Baseball Bat</div>
       <div className="wrap pb-12">
-        <div className="grid md:grid-cols-[1.4fr_1fr_1fr_1.4fr] gap-10">
+        <div className="grid md:grid-cols-[1.6fr_1fr_1.4fr] gap-10">
           <div>
             <div className="flex items-center gap-3">
               <span className="logo-box font-display">VN</span>
@@ -1179,7 +1142,7 @@ export default function Landing({ navigate }) {
         <Path />
         <MediaSection />
         <Voices />
-        <Pricing />
+        <ContactForm />
         <Faq />
         <CtaBanner />
       </main>

@@ -38,6 +38,7 @@ const F = {
   events: path.join(DATA, "events.json"),
   sessions: path.join(DATA, "sessions.json"),
   meta: path.join(DATA, "meta.json"),
+  contacts: path.join(DATA, "contacts.json"),
 };
 
 const readJSON = (f, fb) => { try { return JSON.parse(fs.readFileSync(f, "utf8")); } catch { return fb; } };
@@ -45,7 +46,7 @@ const writeJSON = (f, d) => fs.writeFileSync(f, JSON.stringify(d));
 
 /* init files */
 for (const [k, f] of Object.entries(F)) {
-  if (!fs.existsSync(f)) writeJSON(f, ["uploads", "events"].includes(k) ? [] : {});
+  if (!fs.existsSync(f)) writeJSON(f, ["uploads", "events", "contacts"].includes(k) ? [] : {});
 }
 
 /* события держим в памяти, чтобы не перечитывать файл на каждый визит */
@@ -217,6 +218,22 @@ app.post("/api/analytics/clear-all", auth, (_req, res) => {
   writeJSON(F.meta, m);
   res.json({ ok: true });
 });
+
+/* contact — заявки с формы связи (публичный POST, чтение под auth) */
+app.post("/api/contact", (req, res) => {
+  const b = req.body || {};
+  const name = String(b.name || "").trim().slice(0, 120);
+  const email = String(b.email || "").trim().slice(0, 160);
+  const message = String(b.message || "").trim().slice(0, 4000);
+  if (!name || !email || !message) return res.status(400).json({ error: "missing_fields" });
+  const list = readJSON(F.contacts, []);
+  list.push({ id: "c_" + crypto.randomUUID().slice(0, 8), t: Date.now(), name, email, message, lang: String(b.lang || "en").slice(0, 5), read: false });
+  if (list.length > 2000) list.splice(0, list.length - 2000);
+  writeJSON(F.contacts, list);
+  res.json({ ok: true });
+});
+app.get("/api/contacts", auth, (_req, res) => res.json(readJSON(F.contacts, [])));
+app.post("/api/contacts/clear", auth, (_req, res) => { writeJSON(F.contacts, []); res.json({ ok: true }); });
 
 /* full reset (контент/медиа/настройки/загрузки) */
 app.post("/api/reset", auth, (_req, res) => {
