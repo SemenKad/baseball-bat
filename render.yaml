@@ -1,0 +1,26 @@
+# Render Blueprint — деплой в один клик.
+# На render.com: New → Blueprint → выбрать репозиторий SemenKad/baseball-bat.
+# Render прочитает этот файл, соберёт фронт и запустит Node-сервер,
+# который отдаёт сайт + API + загруженные медиа на одном порту.
+services:
+  - type: web
+    name: baseball-bat
+    runtime: node
+    plan: free
+    # --include=dev нужен, чтобы поставился Vite/Tailwind для сборки фронта
+    buildCommand: npm install --include=dev && npm run build
+    # $PORT даёт Render; сервер слушает API_PORT
+    startCommand: API_PORT=$PORT npm start
+    autoDeploy: true
+    envVars:
+      - key: NODE_VERSION
+        value: "22.12.0"
+      # Логин/пароль админки — вводятся в дашборде Render (в репозиторий не попадают)
+      - key: ADMIN_EMAIL
+        sync: false
+      - key: ADMIN_PASS
+        sync: false
+    # ВНИМАНИЕ: на free-плане файловая система временная — правки контента и
+    # аналитика сбрасываются при перезапуске/редеплое. Для постоянного хранения
+    # подключите платный Disk (mountPath: /opt/render/project/src/server/data)
+    # или вынесите данные в БД.

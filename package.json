@@ -3,6 +3,9 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "engines": {
+    "node": ">=20.12"
+  },
   "scripts": {
     "dev": "concurrently -k -n web,api -c yellow,green \"vite --port 5174 --strictPort\" \"node server/index.js\"",
     "web": "vite --port 5174 --strictPort",
