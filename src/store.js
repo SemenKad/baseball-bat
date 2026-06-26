@@ -61,7 +61,37 @@ export const DEFAULT_SETTINGS = {
   },
   countdownTarget: "2026-11-20T10:00:00",
   countdownEnabled: true,
+  accent: { from: "#FFCF03", to: "#FF8A00" },
 };
+
+/* hex (#RGB/#RRGGBB) -> "r,g,b" для rgba(var(--accent-rgb), …) */
+export function hexToRgb(hex) {
+  let h = String(hex || "").replace("#", "").trim();
+  if (h.length === 3) h = h.split("").map((c) => c + c).join("");
+  const n = parseInt(h, 16);
+  if (h.length !== 6 || Number.isNaN(n)) return "255,207,3";
+  return `${(n >> 16) & 255},${(n >> 8) & 255},${n & 255}`;
+}
+
+/* Применить акцент к :root инлайн-переменными (перебивает обе темы).
+   Дефолтный жёлтый НЕ перебиваем — тогда работает читаемость светлой темы. */
+export function applyAccent(accent) {
+  const a = { ...DEFAULT_SETTINGS.accent, ...(accent || {}) };
+  const root = document.documentElement.style;
+  const isDefault = a.from.toLowerCase() === "#ffcf03" && a.to.toLowerCase() === "#ff8a00";
+  const props = ["--accent", "--accent-from", "--grad-from", "--accent-to", "--grad-to", "--accent-rgb", "--accent-to-rgb"];
+  if (isDefault) {
+    props.forEach((p) => root.removeProperty(p));
+    return;
+  }
+  root.setProperty("--accent", a.from);
+  root.setProperty("--accent-from", a.from);
+  root.setProperty("--grad-from", a.from);
+  root.setProperty("--accent-to", a.to);
+  root.setProperty("--grad-to", a.to);
+  root.setProperty("--accent-rgb", hexToRgb(a.from));
+  root.setProperty("--accent-to-rgb", hexToRgb(a.to));
+}
 
 /* ---------------- Контент (оверрайды переводов по языкам) ---------------- */
 export const fetchContent = () => safe("/content").then((o) => o || {});

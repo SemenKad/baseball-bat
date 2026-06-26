@@ -690,8 +690,8 @@ function PathLine() {
     <svg ref={ref} className="absolute hidden lg:block left-0 top-[26px] w-full h-[60px] pointer-events-none" viewBox="0 0 1000 60" fill="none" preserveAspectRatio="none" aria-hidden="true">
       <defs>
         <linearGradient id="pathgrad" x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0" stopColor="#FFCF03" />
-          <stop offset="1" stopColor="#FF8A00" />
+          <stop offset="0" style={{ stopColor: "var(--accent-from)" }} />
+          <stop offset="1" style={{ stopColor: "var(--accent-to)" }} />
         </linearGradient>
       </defs>
       <path d="M 60 30 C 250 -8, 380 66, 500 30 C 620 -6, 760 64, 940 30" stroke="rgba(244,241,230,.14)" strokeWidth="1.5" strokeDasharray="5 9" />

@@ -14,7 +14,7 @@ import {
   fetchSettings, saveSettings,
   buildLibrary, uploadMedia, deleteUpload, fetchUploads,
   fetchContacts, clearContacts,
-  resetAllContent,
+  resetAllContent, applyAccent, DEFAULT_SETTINGS,
 } from "./store";
 import { getEvents, aggregate, clearDemo, clearAll, hasDemo, track } from "./analytics";
 
@@ -760,7 +760,26 @@ function SettingsTab() {
     setSaved(false);
   };
 
+  /* акцент: обновляем + сразу применяем (живой превью на этой же странице) */
+  const updAccent = (next) => {
+    setS((prev) => ({ ...prev, accent: next }));
+    setSaved(false);
+    applyAccent(next);
+  };
+
   if (!s) return <div className="adm-banner"><RefreshCw size={15} className="spin" aria-hidden="true" /> Загрузка настроек…</div>;
+
+  const acc = s.accent || DEFAULT_SETTINGS.accent;
+  const PRESETS = [
+    { name: "Жёлтый", from: "#FFCF03", to: "#FF8A00" },
+    { name: "Красный", from: "#FF3B3B", to: "#B30000" },
+    { name: "Синий", from: "#4DA3FF", to: "#1D4ED8" },
+    { name: "Зелёный", from: "#36D399", to: "#15803D" },
+    { name: "Фиолетовый", from: "#C084FC", to: "#7C3AED" },
+    { name: "Бирюзовый", from: "#2DD4BF", to: "#0E7490" },
+    { name: "Розовый", from: "#FF7AC6", to: "#BE185D" },
+    { name: "Оранжевый", from: "#FFA62B", to: "#E0480A" },
+  ];
 
   return (
     <div className="adm-grid">
@@ -784,6 +803,58 @@ function SettingsTab() {
         <button className="btn btn-primary !py-2.5 !px-6 !text-[13.5px] mt-5" onClick={save}>
           {saved ? <Check size={15} aria-hidden="true" /> : null} {saved ? "Сохранено" : "Сохранить настройки"}
         </button>
+      </div>
+
+      <div className="adm-card adm-span2">
+        <h3 className="adm-card-t">Акцентный цвет (все «жёлтые» элементы)</h3>
+        <p className="text-[12.5px] text-[var(--text-secondary)] mt-0 mb-4 m-0">
+          Меняет цвет всех акцентных элементов на сайте: текст, кнопки, иконки, бейджи, градиенты. Применяется ко всем посетителям.
+        </p>
+        <div className="flex flex-wrap items-end gap-6">
+          <div>
+            <label className="adm-label">Основной</label>
+            <div className="flex items-center gap-2 mt-1">
+              <input type="color" className="adm-color" value={acc.from} onChange={(e) => updAccent({ ...acc, from: e.target.value })} aria-label="Основной акцент" />
+              <input className="adm-input !w-[110px] font-mono !text-[12px]" value={acc.from} onChange={(e) => updAccent({ ...acc, from: e.target.value })} />
+            </div>
+          </div>
+          <div>
+            <label className="adm-label">Конец градиента</label>
+            <div className="flex items-center gap-2 mt-1">
+              <input type="color" className="adm-color" value={acc.to} onChange={(e) => updAccent({ ...acc, to: e.target.value })} aria-label="Конец градиента" />
+              <input className="adm-input !w-[110px] font-mono !text-[12px]" value={acc.to} onChange={(e) => updAccent({ ...acc, to: e.target.value })} />
+            </div>
+          </div>
+          <div>
+            <label className="adm-label">Превью</label>
+            <div className="mt-1 flex items-center gap-2">
+              <span style={{ display: "inline-block", width: 90, height: 38, borderRadius: 8, background: `linear-gradient(120deg, ${acc.from}, ${acc.to})` }} />
+              <span style={{ fontFamily: "var(--font)", fontWeight: 700, color: acc.from }}>Aa</span>
+            </div>
+          </div>
+        </div>
+
+        <label className="adm-label mt-5">Пресеты</label>
+        <div className="flex flex-wrap gap-2 mt-2">
+          {PRESETS.map((p) => {
+            const on = p.from.toLowerCase() === acc.from.toLowerCase() && p.to.toLowerCase() === acc.to.toLowerCase();
+            return (
+              <button key={p.name} className={`adm-preset ${on ? "adm-preset-on" : ""}`} onClick={() => updAccent({ from: p.from, to: p.to })} title={p.name}>
+                <span style={{ background: `linear-gradient(120deg, ${p.from}, ${p.to})` }} />
+                {p.name}
+              </button>
+            );
+          })}
+        </div>
+
+        <div className="flex gap-2 mt-5">
+          <button className="adm-btn-sm" onClick={() => updAccent({ ...DEFAULT_SETTINGS.accent })}>
+            <RefreshCw size={13} aria-hidden="true" /> Сбросить на жёлтый
+          </button>
+          <button className="btn btn-primary !py-2.5 !px-6 !text-[13.5px]" onClick={save}>
+            {saved ? <Check size={15} aria-hidden="true" /> : null} {saved ? "Сохранено" : "Сохранить цвет"}
+          </button>
+        </div>
       </div>
 
       <div className="adm-card adm-span2">
