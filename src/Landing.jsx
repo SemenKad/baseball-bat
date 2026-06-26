@@ -8,7 +8,7 @@ import {
 import { LANGS, getStrings, deepMerge } from "./i18n";
 import { fetchMedia, fetchSettings, getLang, setLang as persistLang, fetchContent, sendContact, DEFAULT_MEDIA, DEFAULT_SETTINGS } from "./store";
 import { track } from "./analytics";
-import GiLogo from "./GiLogo";
+import Logo from "./Logo";
 
 /* Брендовые иконки убраны из lucide-react — рисуем их в том же штриховом стиле */
 function Instagram({ size = 24, ...props }) {
@@ -256,7 +256,7 @@ function Navbar() {
       <header className={`nav ${scrolled ? "nav-scrolled" : ""}`}>
         <div className="wrap flex items-center justify-between h-[72px] gap-4">
           <a href="#home" className="flex items-center gap-3 no-underline shrink-0" onClick={close}>
-            <span className="logo-box"><GiLogo size={23} /></span>
+            <span className="logo-box"><Logo size={23} /></span>
             <span className="leading-none hidden sm:block">
               <span className="block font-display font-semibold uppercase tracking-[.14em] text-[15px] text-[var(--text-primary)]">
                 Nagorianskii
@@ -291,7 +291,7 @@ function Navbar() {
       <div className={`overlay ${open ? "show" : ""}`} onClick={close} aria-hidden="true" />
       <aside className={`drawer ${open ? "open" : ""}`} aria-label="Mobile menu">
         <div className="flex items-center justify-between mb-8">
-          <span className="logo-box"><GiLogo size={23} /></span>
+          <span className="logo-box"><Logo size={23} /></span>
           <button className="burger" aria-label="Close menu" onClick={close}>
             <X size={22} />
           </button>
@@ -1047,7 +1047,7 @@ function Footer({ navigate }) {
         <div className="grid md:grid-cols-[1.6fr_1fr_1.4fr] gap-10">
           <div>
             <div className="flex items-center gap-3">
-              <span className="logo-box"><GiLogo size={23} /></span>
+              <span className="logo-box"><Logo size={23} /></span>
               <span className="font-display font-semibold uppercase tracking-[.14em] text-[15px]">Nagorianskii</span>
             </div>
             <p className="text-[var(--text-secondary)] text-[13.5px] leading-relaxed mt-4 max-w-[280px]">{L.footer.about}</p>
