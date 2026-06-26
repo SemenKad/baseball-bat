@@ -95,7 +95,7 @@ function useSectionTracking() {
 }
 
 /* ---------- Счётчик: rAF + easeOutExpo ---------- */
-function CounterNum({ to, suffix = "", duration = 2200 }) {
+function CounterNum({ to, suffix = "", prefix = "", duration = 2200 }) {
   const [ref, vis] = useReveal();
   const [val, setVal] = useState(0);
   useEffect(() => {
@@ -113,6 +113,7 @@ function CounterNum({ to, suffix = "", duration = 2200 }) {
   }, [vis, to, duration]);
   return (
     <span ref={ref}>
+      {prefix}
       {val}
       {suffix}
     </span>
@@ -258,7 +259,7 @@ function Navbar() {
             <span className="logo-box"><GiLogo size={23} /></span>
             <span className="leading-none hidden sm:block">
               <span className="block font-display font-semibold uppercase tracking-[.14em] text-[15px] text-[var(--text-primary)]">
-                Nagoryansky
+                Nagorianskii
               </span>
               <span className="block font-mono text-[9.5px] tracking-[.3em] text-[var(--accent)] mt-1 uppercase">
                 the baseball bat
@@ -434,7 +435,7 @@ function Hero() {
           <div className="hero-frame">
             <img
               src={media.heroCard}
-              alt="Vladimir Nagoryansky — studio portrait in gi"
+              alt="Vladimir Nagorianskii — studio portrait in gi"
               loading="lazy"
               decoding="async"
               className="w-full aspect-[4/5] object-cover"
@@ -444,7 +445,7 @@ function Hero() {
             <Trophy size={20} className="text-[var(--accent)]" aria-hidden="true" />
             <div>
               <div className="font-mono text-[10px] tracking-[.18em] uppercase text-[var(--text-secondary)]">{L.hero.rankChip}</div>
-              <div className="font-display font-bold text-[21px] leading-none mt-1">#1 NA · #2 W</div>
+              <div className="font-display font-bold text-[21px] leading-none mt-1">#1 NA · #1 W</div>
             </div>
           </div>
           <div className="float-card" style={{ bottom: "7%", right: "-7%", animationDelay: "-3.2s" }}>
@@ -629,7 +630,7 @@ function Dossier() {
 
 /* ============================ STATS ============================ */
 const STAT_VALUES = [
-  { to: 17, suffix: "" },
+  { to: 1, prefix: "#", suffix: "" },
   { to: 50, suffix: "+" },
   { to: 6, suffix: "" },
   { to: 983, suffix: "K" },
@@ -644,7 +645,7 @@ function Stats() {
           {L.stats.map((s, i) => (
             <Reveal key={i} delay={i * 100} className="stat-cell">
               <div className="stat-num grad-text font-barlow">
-                <CounterNum to={STAT_VALUES[i].to} suffix={STAT_VALUES[i].suffix} />
+                <CounterNum to={STAT_VALUES[i].to} suffix={STAT_VALUES[i].suffix} prefix={STAT_VALUES[i].prefix} />
               </div>
               <div className="font-mono text-[11px] uppercase tracking-[.2em] text-[var(--text-secondary)] mt-3">{s.label}</div>
               <div className="flex items-center justify-center gap-1.5 mt-3 text-[12px] text-[var(--accent)]">
@@ -757,7 +758,7 @@ function MediaSection() {
             <div className="photo-row">
               {media.gallery.map((src, i) => (
                 <button key={src + i} className="photo-item" onClick={() => openLightbox(src)} aria-label={`Photo ${i + 1}`}>
-                  <img src={src} alt={`Vladimir Nagoryansky — tournament photo ${i + 1}`} loading="lazy" decoding="async" />
+                  <img src={src} alt={`Vladimir Nagorianskii — tournament photo ${i + 1}`} loading="lazy" decoding="async" />
                 </button>
               ))}
             </div>
@@ -978,7 +979,7 @@ function CtaBanner() {
 
   return (
     <section id="cta" className="relative overflow-hidden sec">
-      <img src={media.ctaBg} alt="Vladimir Nagoryansky on the mats" loading="lazy" decoding="async" className="absolute inset-0 w-full h-full object-cover opacity-25" />
+      <img src={media.ctaBg} alt="Vladimir Nagorianskii on the mats" loading="lazy" decoding="async" className="absolute inset-0 w-full h-full object-cover opacity-25" />
       <div className="absolute inset-0 cta-mesh" aria-hidden="true" />
       <div className="wrap relative z-10 text-center">
         <Reveal>
@@ -1047,7 +1048,7 @@ function Footer({ navigate }) {
           <div>
             <div className="flex items-center gap-3">
               <span className="logo-box"><GiLogo size={23} /></span>
-              <span className="font-display font-semibold uppercase tracking-[.14em] text-[15px]">Nagoryansky</span>
+              <span className="font-display font-semibold uppercase tracking-[.14em] text-[15px]">Nagorianskii</span>
             </div>
             <p className="text-[var(--text-secondary)] text-[13.5px] leading-relaxed mt-4 max-w-[280px]">{L.footer.about}</p>
             <div className="flex gap-3 mt-5">

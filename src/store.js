@@ -18,7 +18,7 @@ export const MEDIA_LIBRARY = [
   { id: "story-1", src: "/media/story-1.jpeg", type: "photo", label: "Стори 1" },
   { id: "story-2", src: "/media/story-2.jpeg", type: "photo", label: "Стори 2" },
   { id: "story-3", src: "/media/story-3.jpeg", type: "photo", label: "Стори 3" },
-  { id: "rank-global", src: "/media/rank-global.jpeg", type: "proof", label: "Рейтинг: мир #2" },
+  { id: "rank-global", src: "/media/rank-global.jpeg", type: "proof", label: "Рейтинг: мир" },
   { id: "rank-na", src: "/media/rank-na.jpeg", type: "proof", label: "Рейтинг: Сев. Америка #1" },
   ...Array.from({ length: 15 }, (_, i) => ({
     id: `proof-${String(i + 1).padStart(2, "0")}`,

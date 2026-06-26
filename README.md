@@ -1,4 +1,4 @@
-# Vladimir Nagoryansky — The Baseball Bat
+# Vladimir Nagorianskii — The Baseball Bat
 
 Многоязычный (10 языков) лендинг + админ-панель с серверным хранением контента,
 медиа и аналитики. Статистика собирается со всех посетителей.
