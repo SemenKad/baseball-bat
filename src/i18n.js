@@ -74,7 +74,6 @@ export const STRINGS = {
       sub: "The coach, the team and the people watching my matches from the best seats.",
       items: [
         { name: "Thomas Oyarzun", role: "Head coach · BJJ black belt", org: "Lausanne, Switzerland", date: "March 2026", text: "In twenty years on the mats I haven’t seen an athlete who turns anger into such cold precision. Vladimir doesn’t fight his opponent — he solves a problem. And the solution is always the same: the baseball choke." },
-        { name: "Luca Ferreira", role: "Teammate · brown belt", org: "Lausanne Grappling Team", date: "April 2026", text: "Sparring with Vladimir is an exam you have already failed. But after it, any tournament feels like a walk." },
         { name: "Dmitry Safonov", role: "Commentator", org: "AJP Tour Russia", date: "February 2026", text: "When Nagorianskii gets the collar, the stands rise. Everyone knows what comes next — and nobody has stopped it yet." },
       ],
     },
@@ -169,7 +168,6 @@ export const STRINGS = {
       sub: "Тренер, команда и люди, которые видят мои бои с лучших мест.",
       items: [
         { name: "Томас Оярзун", role: "Главный тренер · чёрный пояс BJJ", org: "Лозанна, Швейцария", date: "Март 2026", text: "За двадцать лет на татами я не видел атлета, который превращает злость в настолько холодную точность. Владимир не дерётся с соперником — он решает задачу. И решение у него всегда одно: baseball choke." },
-        { name: "Лука Феррейра", role: "Партнёр по команде · коричневый пояс", org: "Lausanne Grappling Team", date: "Апрель 2026", text: "Спарринг с Владимиром — это экзамен, который ты заранее завалил. Зато после него любой турнир кажется лёгкой прогулкой." },
         { name: "Дмитрий Сафонов", role: "Комментатор", org: "AJP Tour Russia", date: "Февраль 2026", text: "Когда Нагорянский берёт воротник — трибуны встают. Все в зале знают, что произойдёт дальше. И никто ещё не смог это остановить." },
       ],
     },
@@ -257,7 +255,6 @@ export const STRINGS = {
       sub: "El entrenador, el equipo y la gente que ve mis combates desde los mejores asientos.",
       items: [
         { name: "Thomas Oyarzun", role: "Entrenador jefe · cinturón negro de BJJ", org: "Lausana, Suiza", date: "Marzo 2026", text: "En veinte años sobre el tatami no he visto un atleta que convierta la rabia en una precisión tan fría. Vladimir no pelea contra su rival: resuelve un problema. Y la solución siempre es la misma: el baseball choke." },
-        { name: "Luca Ferreira", role: "Compañero de equipo · cinturón marrón", org: "Lausanne Grappling Team", date: "Abril 2026", text: "Hacer sparring con Vladimir es un examen que ya has suspendido. Pero después, cualquier torneo parece un paseo." },
         { name: "Dmitry Safonov", role: "Comentarista", org: "AJP Tour Russia", date: "Febrero 2026", text: "Cuando Nagorianskii agarra el cuello del gi, las gradas se levantan. Todos saben lo que viene — y nadie ha podido pararlo." },
       ],
     },
@@ -341,7 +338,6 @@ export const STRINGS = {
       sub: "教练、队友以及在最佳位置观战的人。",
       items: [
         { name: "托马斯·奥亚尊", role: "主教练 · 巴西柔术黑带", org: "瑞士洛桑", date: "2026年3月", text: "在垫子上的二十年里，我从未见过能把愤怒转化为如此冷酷精准的运动员。弗拉基米尔不是在对抗对手，而是在解题。而答案永远只有一个：棒球绞。" },
-        { name: "卢卡·费雷拉", role: "队友 · 棕带", org: "Lausanne Grappling Team", date: "2026年4月", text: "和弗拉基米尔实战就像一场你注定不及格的考试。但此后任何比赛都像散步。" },
         { name: "德米特里·萨福诺夫", role: "解说员", org: "AJP Tour Russia", date: "2026年2月", text: "纳戈良斯基一抓住衣领，看台就会起立。所有人都知道接下来会发生什么——至今没人能阻止。" },
       ],
     },
@@ -425,7 +421,6 @@ export const STRINGS = {
       sub: "Koç, takım ve maçlarımı en iyi koltuklardan izleyenler.",
       items: [
         { name: "Thomas Oyarzun", role: "Başantrenör · BJJ siyah kuşak", org: "Lozan, İsviçre", date: "Mart 2026", text: "Tatamide geçen yirmi yılda öfkeyi bu kadar soğuk bir isabete dönüştüren sporcu görmedim. Vladimir rakibiyle dövüşmüyor — problem çözüyor. Ve çözüm hep aynı: baseball choke." },
-        { name: "Luca Ferreira", role: "Takım arkadaşı · kahverengi kuşak", org: "Lausanne Grappling Team", date: "Nisan 2026", text: "Vladimir’le idman, daha girmeden kaldığın bir sınav. Ama sonrasında her turnuva yürüyüş gibi geliyor." },
         { name: "Dmitry Safonov", role: "Spiker", org: "AJP Tour Russia", date: "Şubat 2026", text: "Nagorianskii yakayı kavradığında tribünler ayağa kalkıyor. Sıradakini herkes biliyor — ve henüz kimse durduramadı." },
       ],
     },
@@ -509,7 +504,6 @@ export const STRINGS = {
       sub: "Treneris, komanda un cilvēki, kas manas cīņas redz no labākajām vietām.",
       items: [
         { name: "Tomass Ojarzuns", role: "Galvenais treneris · BJJ melnā josta", org: "Lozanna, Šveice", date: "2026. gada marts", text: "Divdesmit gados uz tatami neesmu redzējis sportistu, kas dusmas pārvērš tik aukstā precizitātē. Vladimirs necīnās ar pretinieku — viņš risina uzdevumu. Un risinājums vienmēr ir viens: baseball choke." },
-        { name: "Luka Ferreira", role: "Komandas biedrs · brūnā josta", org: "Lausanne Grappling Team", date: "2026. gada aprīlis", text: "Sparings ar Vladimiru ir eksāmens, kuru tu jau esi izkritis. Toties pēc tā jebkurš turnīrs šķiet pastaiga." },
         { name: "Dmitrijs Safonovs", role: "Komentētājs", org: "AJP Tour Russia", date: "2026. gada februāris", text: "Kad Nagorianskii satver apkakli, tribīnes pieceļas. Visi zina, kas notiks tālāk — un neviens to vēl nav apturējis." },
       ],
     },
@@ -593,7 +587,6 @@ export const STRINGS = {
       sub: "O treinador, a equipe e as pessoas que assistem às minhas lutas dos melhores lugares.",
       items: [
         { name: "Thomas Oyarzun", role: "Treinador-chefe · faixa-preta de BJJ", org: "Lausanne, Suíça", date: "Março 2026", text: "Em vinte anos de tatame nunca vi um atleta que transforme raiva em uma precisão tão fria. Vladimir não luta contra o adversário — ele resolve um problema. E a solução é sempre a mesma: o baseball choke." },
-        { name: "Luca Ferreira", role: "Companheiro de equipe · faixa-marrom", org: "Lausanne Grappling Team", date: "Abril 2026", text: "Treinar com Vladimir é uma prova em que você já foi reprovado. Mas depois dela, qualquer campeonato parece um passeio." },
         { name: "Dmitry Safonov", role: "Comentarista", org: "AJP Tour Russia", date: "Fevereiro 2026", text: "Quando Nagorianskii pega a gola, a arquibancada levanta. Todo mundo sabe o que vem a seguir — e ninguém conseguiu parar até hoje." },
       ],
     },
@@ -677,7 +670,6 @@ export const STRINGS = {
       sub: "المدرب والفريق ومن يشاهدون نزالاتي من أفضل المقاعد.",
       items: [
         { name: "توماس أويارزون", role: "المدرب الرئيسي · حزام أسود BJJ", org: "لوزان، سويسرا", date: "مارس 2026", text: "في عشرين عاماً على البساط لم أرَ رياضياً يحوّل الغضب إلى دقة باردة كهذه. فلاديمير لا يقاتل خصمه — بل يحل مسألة. والحل دائماً واحد: خنقة البيسبول." },
-        { name: "لوكا فيريرا", role: "زميل في الفريق · حزام بني", org: "Lausanne Grappling Team", date: "أبريل 2026", text: "التدريب مع فلاديمير امتحانٌ رسبت فيه سلفاً. لكن بعده تبدو أي بطولة نزهة." },
         { name: "دميتري سافونوف", role: "معلّق", org: "AJP Tour Russia", date: "فبراير 2026", text: "عندما يمسك ناغوريانسكي بالياقة تنهض المدرجات. الجميع يعرف ما سيحدث تالياً — ولم يستطع أحد إيقافه بعد." },
       ],
     },
@@ -761,7 +753,6 @@ export const STRINGS = {
       sub: "コーチ、チーム、そして最高の席から試合を見る人々。",
       items: [
         { name: "トーマス・オヤルズン", role: "ヘッドコーチ · BJJ黒帯", org: "スイス・ローザンヌ", date: "2026年3月", text: "畳の上で20年、怒りをこれほど冷たい正確さに変える選手を見たことがない。ウラジーミルは相手と戦っているのではない——問題を解いている。そして答えはいつも同じ。ベースボールチョークだ。" },
-        { name: "ルカ・フェレイラ", role: "チームメイト · 茶帯", org: "Lausanne Grappling Team", date: "2026年4月", text: "ウラジーミルとのスパーは、受ける前から落第が決まっている試験。だがその後はどんな大会も散歩に思える。" },
         { name: "ドミトリー・サフォノフ", role: "実況解説", org: "AJP Tour Russia", date: "2026年2月", text: "ナゴリャンスキーが襟を掴むと観客席が立ち上がる。次に何が起きるか全員が知っている——そして誰もまだ止められていない。" },
       ],
     },
@@ -845,7 +836,6 @@ export const STRINGS = {
       sub: "Der Trainer, das Team und die Leute, die meine Kämpfe von den besten Plätzen sehen.",
       items: [
         { name: "Thomas Oyarzun", role: "Cheftrainer · BJJ-Schwarzgurt", org: "Lausanne, Schweiz", date: "März 2026", text: "In zwanzig Jahren auf der Matte habe ich keinen Athleten gesehen, der Wut in derart kalte Präzision verwandelt. Vladimir kämpft nicht gegen seinen Gegner — er löst eine Aufgabe. Und die Lösung ist immer dieselbe: der Baseball Choke." },
-        { name: "Luca Ferreira", role: "Teamkollege · Braungurt", org: "Lausanne Grappling Team", date: "April 2026", text: "Sparring mit Vladimir ist eine Prüfung, durch die du längst durchgefallen bist. Dafür fühlt sich danach jedes Turnier wie ein Spaziergang an." },
         { name: "Dmitry Safonov", role: "Kommentator", org: "AJP Tour Russia", date: "Februar 2026", text: "Wenn Nagorianskii den Kragen greift, stehen die Ränge auf. Jeder weiß, was als Nächstes kommt — und noch niemand konnte es stoppen." },
       ],
     },
